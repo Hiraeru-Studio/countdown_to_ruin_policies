@@ -19,7 +19,10 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.65 Georgia, "Times New Roman", serif;
+    /* Serifas de leitura que já vêm no sistema (Android: Noto Serif; Windows: Cambria; Apple: Iowan e
+       Charter), sem fonte baixada de terceiros numa página de privacidade. */
+    font: 18px/1.75 "Iowan Old Style", Charter, "Bitstream Charter", "Noto Serif", Cambria, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   }
   header { background: var(--navy); color: #f1e6cf; padding: 28px 16px 22px; text-align: center; }
   header h1 { margin: 0; font-size: 1.7rem; letter-spacing: .02em; }
@@ -30,20 +33,27 @@
     border: 1px solid #c9b995; background: transparent; color: #f1e6cf;
   }
   nav.langs button[aria-pressed="true"] { background: #e3b458; border-color: #e3b458; color: #1f2a44; font-weight: bold; }
-  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 56px; }
+  main { max-width: 760px; margin: 0 auto; padding: 28px 16px 56px; }
   section.lang {
     background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
-    padding: 8px 24px 24px; margin-bottom: 24px;
+    padding: 12px 40px 32px; margin-bottom: 28px;
+    box-shadow: 0 1px 3px rgba(58, 42, 28, .08);
   }
-  h2 { font-size: 1.45rem; margin: 28px 0 4px; padding-bottom: 6px; border-bottom: 2px solid var(--gold); }
-  h3 { font-size: 1.08rem; margin: 22px 0 4px; color: var(--gold); }
-  p, ul { margin: 8px 0; }
-  ul { padding-left: 22px; }
+  /* Medida confortável: perto de 70 caracteres por linha. */
+  section.lang > * { max-width: 66ch; }
+  h2 { font-size: 1.55rem; line-height: 1.3; margin: 40px 0 6px; padding-bottom: 8px; border-bottom: 2px solid var(--gold); scroll-margin-top: 16px; }
+  h3 { font-size: 1.12rem; line-height: 1.35; margin: 30px 0 6px; color: var(--gold); }
+  p, ul { margin: 12px 0; }
+  p, li { text-wrap: pretty; hyphens: auto; }
+  ul { padding-left: 24px; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--gold); }
+  strong { color: var(--ink); }
   .meta { color: var(--soft); font-size: .92rem; }
   .toc { font-size: .95rem; }
-  a { color: var(--gold); }
+  a { color: var(--gold); text-underline-offset: 3px; text-decoration-thickness: 1px; }
   footer { text-align: center; color: var(--soft); font-size: .88rem; padding: 0 16px 32px; }
-  @media (max-width: 480px) { section.lang { padding: 4px 16px 18px; } body { font-size: 16px; } }
+  @media (max-width: 480px) { section.lang { padding: 6px 18px 22px; } body { font-size: 17px; line-height: 1.7; } h2 { margin-top: 32px; } }
 </style>
 </head>
 <body>
@@ -70,7 +80,7 @@
   <h3>1. Information we collect</h3>
   <p>The game has no account system of its own and no advertising. We do not receive or store personal information on any server of ours.</p>
   <p><strong>Usage statistics (only if you agree).</strong> The first time you open the game, it asks whether you want to share usage data. If you accept, the game sends gameplay events through Google Analytics for Firebase: runs started and finished (hero, difficulty, result), missions played, cards picked, bought, removed and played, shop visits, talents chosen, tutorial steps seen and the game language. Together with these events, Firebase receives an app-instance identifier (a random ID created for this installation), the device model, the Android version, the app version and the approximate country, derived from the network address.</p>
-  <p>We do not collect your name, e-mail address, Play Games player name, advertising ID or precise location, and this data is never used for advertising. If you decline, none of it is collected. You can change your choice at any time: title screen → Settings → Share usage data.</p>
+  <p>We do not collect your name, e-mail address, Play Games player name, advertising ID or precise location, and this data is never used for advertising. If you decline, none of it is collected. You can change your choice at any time: title screen → Settings → Usage data.</p>
 
   <h3>2. Information stored on your device</h3>
   <p>The game saves the following on your device only: your progress (unlocked cards, hero mastery, difficulty levels won), the run in progress, and your settings (language and volume). This data never leaves your device unless you connect to Google Play Games, as described below.</p>
@@ -98,7 +108,7 @@
     <li><strong>In the game:</strong> title screen → Settings → Reset progress erases your progress on the device and, if you are connected, in your Google Play Games account.</li>
     <li><strong>On the device:</strong> uninstalling the game removes all local data.</li>
     <li><strong>In your Google account:</strong> you can delete the game's saved data in the Play Games app, under Settings → Delete Play Games account &amp; data.</li>
-    <li><strong>Usage statistics:</strong> turning off Share usage data in Settings stops the collection immediately. Data already sent is kept in Google Analytics for up to 14 months and then deleted automatically.</li>
+    <li><strong>Usage statistics:</strong> unchecking Usage data in Settings stops the collection immediately. Data already sent is kept in Google Analytics for up to 14 months and then deleted automatically.</li>
   </ul>
   <p>Apart from these statistics, we keep nothing ourselves. If you want your usage data deleted earlier, or need help deleting anything else, write to us.</p>
 
@@ -154,7 +164,7 @@
   <h3>1. Informações que coletamos</h3>
   <p>O jogo não tem sistema de conta próprio nem publicidade. Não recebemos nem guardamos informações pessoais em nenhum servidor nosso.</p>
   <p><strong>Estatísticas de uso (só se você concordar).</strong> Na primeira vez que você abre o jogo, ele pergunta se você quer compartilhar dados de uso. Se aceitar, o jogo envia eventos de jogo pelo Google Analytics para Firebase: runs iniciadas e encerradas (herói, dificuldade, resultado), missões jogadas, cartas escolhidas, compradas, removidas e jogadas, visitas à Loja, talentos escolhidos, passos do tutorial vistos e o idioma do jogo. Junto desses eventos, o Firebase recebe um identificador da instalação do app (um código aleatório criado para esta instalação), o modelo do aparelho, a versão do Android, a versão do app e o país aproximado, obtido pelo endereço de rede.</p>
-  <p>Não coletamos o seu nome, e-mail, nome de jogador do Play Games, identificador de publicidade nem localização precisa, e esses dados nunca são usados para publicidade. Se você recusar, nada disso é coletado. Você pode mudar a escolha quando quiser: tela de título → Configurações → Compartilhar dados de uso.</p>
+  <p>Não coletamos o seu nome, e-mail, nome de jogador do Play Games, identificador de publicidade nem localização precisa, e esses dados nunca são usados para publicidade. Se você recusar, nada disso é coletado. Você pode mudar a escolha quando quiser: tela de título → Configurações → Dados de uso.</p>
 
   <h3>2. Informações guardadas no seu aparelho</h3>
   <p>O jogo salva apenas no seu aparelho: o seu progresso (cartas liberadas, maestria dos heróis, níveis de dificuldade vencidos), a run em andamento e as suas configurações (idioma e volume). Esses dados não saem do aparelho, a menos que você se conecte ao Google Play Games, como descrito abaixo.</p>
@@ -182,7 +192,7 @@
     <li><strong>No jogo:</strong> tela de título → Configurações → Zerar progresso apaga o progresso no aparelho e, se você estiver conectado, na sua conta do Google Play Games.</li>
     <li><strong>No aparelho:</strong> desinstalar o jogo remove todos os dados locais.</li>
     <li><strong>Na sua conta Google:</strong> você pode apagar os dados salvos do jogo no app Play Games, em Configurações → Excluir conta e dados do Play Games.</li>
-    <li><strong>Estatísticas de uso:</strong> desligar Compartilhar dados de uso nas Configurações interrompe a coleta na hora. Os dados já enviados ficam no Google Analytics por até 14 meses e depois são apagados automaticamente.</li>
+    <li><strong>Estatísticas de uso:</strong> desmarcar Dados de uso nas Configurações interrompe a coleta na hora. Os dados já enviados ficam no Google Analytics por até 14 meses e depois são apagados automaticamente.</li>
   </ul>
   <p>Fora essas estatísticas, não guardamos nada conosco. Se quiser que os seus dados de uso sejam apagados antes, ou precisar de ajuda para apagar qualquer outra coisa, escreva para nós.</p>
 
@@ -238,7 +248,7 @@
   <h3>1. Información que recopilamos</h3>
   <p>El juego no tiene sistema de cuentas propio ni publicidad. No recibimos ni guardamos información personal en ningún servidor nuestro.</p>
   <p><strong>Estadísticas de uso (solo si estás de acuerdo).</strong> La primera vez que abres el juego, te pregunta si quieres compartir datos de uso. Si aceptas, el juego envía eventos de juego mediante Google Analytics para Firebase: partidas iniciadas y terminadas (héroe, dificultad, resultado), misiones jugadas, cartas elegidas, compradas, eliminadas y jugadas, visitas a la Tienda, talentos elegidos, pasos del tutorial vistos y el idioma del juego. Junto con estos eventos, Firebase recibe un identificador de la instalación de la app (un código aleatorio creado para esta instalación), el modelo del dispositivo, la versión de Android, la versión de la app y el país aproximado, obtenido a partir de la dirección de red.</p>
-  <p>No recopilamos tu nombre, correo, nombre de jugador de Play Juegos, identificador de publicidad ni ubicación precisa, y estos datos nunca se usan para publicidad. Si no aceptas, no se recopila nada de esto. Puedes cambiar tu elección cuando quieras: pantalla de título → Ajustes → Compartir datos de uso.</p>
+  <p>No recopilamos tu nombre, correo, nombre de jugador de Play Juegos, identificador de publicidad ni ubicación precisa, y estos datos nunca se usan para publicidad. Si no aceptas, no se recopila nada de esto. Puedes cambiar tu elección cuando quieras: pantalla de título → Ajustes → Datos de uso.</p>
 
   <h3>2. Información guardada en tu dispositivo</h3>
   <p>El juego guarda solo en tu dispositivo: tu progreso (cartas desbloqueadas, maestría de los héroes, niveles de dificultad superados), la partida en curso y tus ajustes (idioma y volumen). Estos datos no salen del dispositivo, a menos que te conectes a Google Play Juegos, como se describe abajo.</p>
@@ -266,7 +276,7 @@
     <li><strong>En el juego:</strong> pantalla de título → Ajustes → Reiniciar progreso borra tu progreso en el dispositivo y, si estás conectado, en tu cuenta de Google Play Juegos.</li>
     <li><strong>En el dispositivo:</strong> desinstalar el juego elimina todos los datos locales.</li>
     <li><strong>En tu cuenta de Google:</strong> puedes borrar los datos guardados del juego en la app Play Juegos, en Ajustes → Borrar cuenta y datos de Play Juegos.</li>
-    <li><strong>Estadísticas de uso:</strong> desactivar Compartir datos de uso en Ajustes detiene la recopilación al instante. Los datos ya enviados se conservan en Google Analytics hasta 14 meses y después se eliminan automáticamente.</li>
+    <li><strong>Estadísticas de uso:</strong> desmarcar Datos de uso en Ajustes detiene la recopilación al instante. Los datos ya enviados se conservan en Google Analytics hasta 14 meses y después se eliminan automáticamente.</li>
   </ul>
   <p>Aparte de estas estadísticas, no guardamos nada por nuestra parte. Si quieres que tus datos de uso se borren antes, o necesitas ayuda para borrar cualquier otra cosa, escríbenos.</p>
 
